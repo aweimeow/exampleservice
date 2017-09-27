@@ -14,16 +14,21 @@
 # limitations under the License.
 
 
-name: exampleservice-synchronizer
-accessor:
-  username: xosadmin@opencord.org
-  password: "@/opt/xos/services/exampleservice/credentials/xosadmin@opencord.org"
-required_models:
-  - ExampleService
-  - ExampleServiceInstance
-  - ServiceDependency
-  - ServiceMonitoringAgentInfo
-dependency_graph: "/opt/xos/synchronizers/exampleservice/model-deps"
-steps_dir: "/opt/xos/synchronizers/exampleservice/steps"
-sys_dir: "/opt/xos/synchronizers/exampleservice/sys"
-model_policies_dir: "/opt/xos/synchronizers/exampleservice/model_policies"
+#!/usr/bin/env python
+
+# Runs the standard XOS synchronizer
+
+import importlib
+import os
+import sys
+from xosconfig import Config
+
+config_file = os.path.abspath(os.path.dirname(os.path.realpath(__file__)) + '/oaiservice_config.yaml')
+Config.init(config_file, 'synchronizer-config-schema.yaml')
+
+synchronizer_path = os.path.join(os.path.dirname(
+    os.path.realpath(__file__)), "../../synchronizers/new_base")
+sys.path.append(synchronizer_path)
+mod = importlib.import_module("xos-synchronizer")
+mod.main()
+

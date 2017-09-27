@@ -38,7 +38,7 @@
     when: cron_job_pids_count.stdout == "0"
 
   - name: Copy cron job to destination
-    copy: src=/opt/xos/synchronizers/exampleservice/monitoring_agent/
+    copy: src=/opt/xos/synchronizers/oaiservice/monitoring_agent/
       dest=/usr/local/share/monitoring_agent/
     become: yes
     when: cron_job_pids_count.stdout == "0"

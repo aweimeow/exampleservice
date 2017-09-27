@@ -14,8 +14,12 @@
 # limitations under the License.
 
 
-from synchronizers.new_base.modelaccessor import *
-from synchronizers.new_base.model_policies.model_policy_tenantwithcontainer import TenantWithContainerPolicy
+from service import XOSService
+from services.oaiservice.models import OAIService
 
-class ExampleServiceInstancePolicy(TenantWithContainerPolicy):
-    model_name = "ExampleServiceInstance"
+class XOSOAIService(XOSService):
+    provides = "tosca.nodes.OAIService"
+    xos_model = OAIService
+    copyin_props = ["view_url", "icon_url", "enabled", "published", "public_key", "private_key_fn", "versionNumber", "service_message"]
+
+

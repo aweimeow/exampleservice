@@ -20,8 +20,8 @@ from core.models import Service, TenantWithContainer
 from django.db import transaction
 from django.db.models import *
 
-SERVICE_NAME = 'exampleservice'
-SERVICE_NAME_VERBOSE = 'Example Service'
-SERVICE_NAME_VERBOSE_PLURAL = 'Example Services'
-SERVICE_INSTANCE_NAME_VERBOSE = 'Example Service Instance'
-SERVICE_INSTANCE_VERBOSE_PLURAL = 'Example Service Instances'
+SERVICE_NAME = 'oaiservice'
+SERVICE_NAME_VERBOSE = 'OpenAirInterface Service'
+SERVICE_NAME_VERBOSE_PLURAL = 'OpenAirInterface Services'
+SERVICE_INSTANCE_NAME_VERBOSE = 'OpenAirInterface Service Instance'
+SERVICE_INSTANCE_VERBOSE_PLURAL = 'OpenAirInterface Service Instances'

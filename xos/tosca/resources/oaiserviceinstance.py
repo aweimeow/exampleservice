@@ -14,20 +14,20 @@
 
 from xosresource import XOSResource
 from core.models import Service
-from services.exampleservice.models import ExampleServiceInstance
+from services.oaiservice.models import OAIServiceInstance
 
-class XOSExampleServiceInstance(XOSResource):
-    provides = ["tosca.nodes.ExampleServiceInstance",
-                "tosca.nodes.ExampleTenant"            # deprecated
+class XOSOAIServiceInstance(XOSResource):
+    provides = ["tosca.nodes.OAIServiceInstance",
+                "tosca.nodes.OAITenant"            # deprecated
                 ]
-    xos_model = ExampleServiceInstance
+    xos_model = OAIServiceInstance
     name_field = "service_specific_id"
     copyin_props = ("tenant_message",)
 
     def get_xos_args(self, throw_exception=True):
-        args = super(XOSExampleServiceInstance, self).get_xos_args()
+        args = super(XOSOAIServiceInstance, self).get_xos_args()
 
-        # ExampleServiceInstance must always have a provider_service
+        # OAIServiceInstance must always have a provider_service
         provider_name = self.get_requirement("tosca.relationships.TenantOfService", throw_exception=True)
         if provider_name:
             args["owner"] = self.get_xos_object(Service, throw_exception=True, name=provider_name)
@@ -36,9 +36,9 @@ class XOSExampleServiceInstance(XOSResource):
 
     def get_existing_objs(self):
         args = self.get_xos_args(throw_exception=False)
-        return ExampleServiceInstance.objects.filter(owner=args["owner"], service_specific_id=args["service_specific_id"])
+        return OAIServiceInstance.objects.filter(owner=args["owner"], service_specific_id=args["service_specific_id"])
         return []
 
     def can_delete(self, obj):
-        return super(XOSExampleServiceInstance, self).can_delete(obj)
+        return super(XOSOAIServiceInstance, self).can_delete(obj)
 

@@ -22,10 +22,10 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 include(macros.m4)
 
 node_types:
-    tosca.nodes.ExampleService:
+    tosca.nodes.OAIService:
         derived_from: tosca.nodes.Root
         description: >
-            Example Service
+            OAI Service
         capabilities:
             xos_base_service_caps
         properties:
@@ -35,24 +35,24 @@ node_types:
                 type: string
                 required: false
 
-    tosca.nodes.ExampleServiceInstance:
+    tosca.nodes.OAIServiceInstance:
         derived_from: tosca.nodes.Root
         description: >
-            A ServiceInstance of the example service
+            A ServiceInstance of the Open Air Interface service
         properties:
             xos_base_tenant_props
             tenant_message:
                 type: string
                 required: false
 
-    # deprecated, replaced by ExampleServiceInstance
-    tosca.nodes.ExampleTenant:
-        derived_from: tosca.nodes.Root
-        description: >
-            A Tenant of the example service
-        properties:
-            xos_base_tenant_props
-            tenant_message:
-                type: string
-                required: false
+    # deprecated, replaced by OAIServiceInstance
+    # tosca.nodes.OAITenant:
+    #     derived_from: tosca.nodes.Root
+    #     description: >
+    #         A Tenant of the Open Air Interface service
+    #     properties:
+    #         xos_base_tenant_props
+    #         tenant_message:
+    #             type: string
+    #             required: false
 

@@ -37,10 +37,10 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 
 
 node_types:
-    tosca.nodes.ExampleService:
+    tosca.nodes.OAIService:
         derived_from: tosca.nodes.Root
         description: >
-            Example Service
+            OAI Service
         capabilities:
             scalable:
                 type: tosca.capabilities.Scalable
@@ -98,10 +98,10 @@ node_types:
                 type: string
                 required: false
 
-    tosca.nodes.ExampleServiceInstance:
+    tosca.nodes.OAIServiceInstance:
         derived_from: tosca.nodes.Root
         description: >
-            A ServiceInstance of the example service
+            A ServiceInstance of the OAI service
         properties:
             kind:
                 type: string
@@ -116,10 +116,10 @@ node_types:
                 required: false
 
     # deprecated, replaced by ExampleServiceInstance
-    tosca.nodes.ExampleTenant:
+    tosca.nodes.OAITenant:
         derived_from: tosca.nodes.Root
         description: >
-            A Tenant of the example service
+            A Tenant of the OAI service
         properties:
             kind:
                 type: string

@@ -55,28 +55,28 @@ def parse_status_page():
     while line:
         line = line.strip()
         if "Total Accesses:" in line:
-            key = "exampleservice.apache.total.accesses"
+            key = "oaiservice.apache.total.accesses"
             val  = {'val':int(line.strip("Total Accesses:")), 'unit':'accesses', 'metric_type':'gauge'}
         elif "Total kBytes:" in line:
-            key = "exampleservice.apache.total.kBytes"
+            key = "oaiservice.apache.total.kBytes"
             val  = {'val':float(line.strip("Total kBytes:")), 'unit':'kBytes', 'metric_type':'gauge'}
         elif "Uptime:" in line:
-            key = "exampleservice.apache.uptime"
+            key = "oaiservice.apache.uptime"
             val  = {'val':int(line.strip("Uptime:")), 'unit':'seconds', 'metric_type':'gauge'}
         elif "ReqPerSec:" in line:
-            key = "exampleservice.apache.reqpersec"
+            key = "oaiservice.apache.reqpersec"
             val  = {'val':float(line.strip("ReqPerSec:")), 'unit':'rate', 'metric_type':'gauge'}
         elif "BytesPerSec:" in line:
-            key = "exampleservice.apache.bytespersec"
+            key = "oaiservice.apache.bytespersec"
             val  = {'val':float(line.strip("BytesPerSec:")), 'unit':'rate', 'metric_type':'gauge'}
         elif "BytesPerReq:" in line:
-            key = "exampleservice.apache.bytesperreq"
+            key = "oaiservice.apache.bytesperreq"
             val  = {'val':float(line.strip("BytesPerReq:")), 'unit':'rate', 'metric_type':'gauge'}
         elif "BusyWorkers:" in line:
-            key = "exampleservice.apache.busyworkers"
+            key = "oaiservice.apache.busyworkers"
             val  = {'val':int(line.strip("BusyWorkers:")), 'unit':'workers', 'metric_type':'gauge'}
         elif "IdleWorkers:" in line:
-            key = "exampleservice.apache.idleworkers"
+            key = "oaiservice.apache.idleworkers"
             val  = {'val':int(line.strip("IdleWorkers:")), 'unit':'workers', 'metric_type':'gauge'}
 
         dictStatus[key] = val

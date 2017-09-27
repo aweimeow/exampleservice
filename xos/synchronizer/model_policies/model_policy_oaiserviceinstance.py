@@ -14,19 +14,8 @@
 # limitations under the License.
 
 
----
-# exampleserviceinstance_playbook
+from synchronizers.new_base.modelaccessor import *
+from synchronizers.new_base.model_policies.model_policy_tenantwithcontainer import TenantWithContainerPolicy
 
-- hosts: "{{ instance_name }}"
-  connection: ssh
-  user: ubuntu
-  sudo: yes
-  gather_facts: no
-  vars:
-    - tenant_message: "{{ tenant_message }}"
-    - service_message: "{{ service_message }}"
-
-  roles:
-    - install_apache
-    - create_index
-
+class OAIServiceInstancePolicy(TenantWithContainerPolicy):
+    model_name = "OAIServiceInstance"

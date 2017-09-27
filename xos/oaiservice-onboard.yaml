@@ -16,22 +16,22 @@
 
 tosca_definitions_version: tosca_simple_yaml_1_0
 
-description: Onboard the exampleservice
+description: Onboard the Open Air Interface EPC service
 
 imports:
    - custom_types/xos.yaml
 
 topology_template:
   node_templates:
-    exampleservice:
+    oaiservice:
       type: tosca.nodes.ServiceController
       properties:
-          base_url: file:///opt/xos_services/exampleservice/xos/
+          base_url: file:///opt/xos_services/oaiservice/xos/
           # The following will concatenate with base_url automatically, if
           # base_url is non-null.
           xproto: ./
-          tosca_custom_types: exampleservice.yaml
-          tosca_resource: tosca/resources/exampleservice.py, tosca/resources/exampleserviceinstance.py
-          private_key: file:///opt/xos/key_import/exampleservice_rsa
-          public_key: file:///opt/xos/key_import/exampleservice_rsa.pub
+          tosca_custom_types: oaiservice.yaml
+          tosca_resource: tosca/resources/oaiservice.py, tosca/resources/oaiserviceinstance.py
+          private_key: file:///opt/xos/key_import/oaiservice_rsa
+          public_key: file:///opt/xos/key_import/oaiservice_rsa.pub
 
