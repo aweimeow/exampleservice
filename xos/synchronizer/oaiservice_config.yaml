@@ -17,7 +17,7 @@
 name: oaiservice-synchronizer
 accessor:
   username: xosadmin@opencord.org
-  password: "@/opt/xos/services/exampleservice/credentials/xosadmin@opencord.org"
+  password: "@/opt/xos/services/oaiservice/credentials/xosadmin@opencord.org"
 required_models:
   - OAIService
   - OAIServiceInstance

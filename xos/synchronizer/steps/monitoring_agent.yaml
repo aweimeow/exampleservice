@@ -69,7 +69,7 @@
 
   - name : starting monitoring agent
     uri:
-      url: http://localhost:5004/monitoring/agent/exampleservice/start
+      url: http://localhost:5004/monitoring/agent/oaiservice/start
       method: POST
       body: '{ "target":"{{target_uri}}", "keystone_user_id": "{{keystone_user_id}}", "keystone_tenant_id": "{{keystone_tenant_id}}" }'
       force_basic_auth: yes
