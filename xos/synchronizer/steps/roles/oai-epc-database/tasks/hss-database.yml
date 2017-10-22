@@ -1,0 +1,24 @@
+- name: install mysql for python
+  apt:
+    name: python-mysqldb
+    state: present
+
+- name: drop oai_db database
+  mysql_db:
+    login_user: root
+    login_password: linux
+    name: oai_db
+    state: absent
+
+- name: generate oai_db sql file
+  template:
+    src: oai_db.j2
+    dest: ~/oai_db.sql
+
+- name: import oai_db sql
+  mysql_db:
+    login_user: root
+    login_password: linux
+    name: oai_db
+    state: import
+    target: ~/oai_db.sql

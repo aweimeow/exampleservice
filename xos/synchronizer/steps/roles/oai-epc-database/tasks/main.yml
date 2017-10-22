@@ -1,0 +1,3 @@
+- name: setup database if target is hss
+  include: hss-database.yml
+  when: TARGET_SERVICE == "hss"

@@ -1,0 +1,35 @@
+- name: create oai config directory
+  file:
+    path: /usr/local/etc/oai/freeDiameter
+    state: directory
+
+- name: overwrite oai epc configs
+  template:
+    src: "{{item.src}}"
+    dest: "{{item.dest}}"
+  with_items:
+    - { src: 'acl.j2', dest: '/usr/local/etc/oai/freeDiameter/acl.conf' }
+    - { src: 'hss_fd.j2', dest: '/usr/local/etc/oai/freeDiameter/hss_fd.conf' }
+    - { src: 'mme_fd.j2', dest: '/usr/local/etc/oai/freeDiameter/mme_fd.conf' }
+    - { src: 'hss.j2', dest: '/usr/local/etc/oai/hss.conf' }
+    - { src: 'mme.j2', dest: '/usr/local/etc/oai/mme.conf' }
+    - { src: 'spgw.j2', dest: '/usr/local/etc/oai/spgw.conf' }
+
+- name: set host name of mme
+  hostname:
+    name: "{{MME_ALIAS}}"
+  when: TARGET_SERVICE == "mme"
+
+- name: set host name of hss
+  hostname:
+    name: "{{HSS_ALIAS}}"
+  when: TARGET_SERVICE == "hss"
+
+- name: set hosts
+  lineinfile:
+    name: /etc/hosts
+    line: "{{item.line}}"
+    regexp: "{{item.regex}}"
+  with_items:
+    - { regex: "{{HSS_HOST}}", line: '{{HSS_IP}} {{HSS_HOST}} {{HSS_ALIAS}}' }
+    - { regex: "{{MME_HOST}}", line: '{{MME_IP}} {{MME_HOST}} {{MME_ALIAS}}'}
