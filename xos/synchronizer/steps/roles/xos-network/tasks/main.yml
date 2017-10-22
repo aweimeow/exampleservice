@@ -20,13 +20,13 @@
   shell: ip route | grep default | awk '{print $5}'
   register: HOST_DEFAULT_INTERFACE
 
-# - name: find out current component type
-#   shell: cat ~/.oai_component_type
-#   register: OAI_COMPONENT_TYPE
+- name: find out current component type
+  shell: cat ~/.oai_component_type
+  register: OAI_COMPONENT_TYPE
 
-# - name: set target service into fact
-#   set_fact:
-#     TARGET_SERVICE: "{{OAI_COMPONENT_TYPE.stdout}}"
+- name: set target service into fact
+  set_fact:
+    TARGET_SERVICE: "{{OAI_COMPONENT_TYPE.stdout}}"
 
 - name: find out default mask
   shell: ip route | grep -E "^{{PUBLIC_NETWORK_PATTERN}}" | awk '{print $1}' | grep -Eo "/[0-9]+"
@@ -42,27 +42,6 @@
   set_fact: 
     cip: "{{HOST_DEFAULT_IP.stdout}}"
 
-- name: set fact of ip if current host is hss
-  set_fact: 
-    HSS_IP:  "{{cip}}"
-    MME_IP:  "{{cip.split('.')[0]}}.{{cip.split('.')[1]}}.{{cip.split('.')[2]}}.{{(cip.split('.')[3]|int)+2}}"
-    SPGW_IP: "{{cip.split('.')[0]}}.{{cip.split('.')[1]}}.{{cip.split('.')[2]}}.{{(cip.split('.')[3]|int)+1}}"
-  when: TARGET_SERVICE == "hss"
-
-- name: set fact of ip if current host is mme
-  set_fact: 
-    HSS_IP:  "{{cip.split('.')[0]}}.{{cip.split('.')[1]}}.{{cip.split('.')[2]}}.{{(cip.split('.')[3]|int)-2}}"
-    MME_IP:  "{{cip}}"
-    SPGW_IP: "{{cip.split('.')[0]}}.{{cip.split('.')[1]}}.{{cip.split('.')[2]}}.{{(cip.split('.')[3]|int)-1}}"
-  when: TARGET_SERVICE == "mme"
-
-- name: set fact of ip if current host is spgw
-  set_fact: 
-    HSS_IP:  "{{cip.split('.')[0]}}.{{cip.split('.')[1]}}.{{cip.split('.')[2]}}.{{(cip.split('.')[3]|int)-1}}"
-    MME_IP:  "{{cip.split('.')[0]}}.{{cip.split('.')[1]}}.{{cip.split('.')[2]}}.{{(cip.split('.')[3]|int)+1}}"
-    SPGW_IP: "{{cip}}"
-  when: TARGET_SERVICE == "spgw"
-
 - name: set oai component interfaces
   set_fact:
     HSS_INTERFACE: "{{HOST_DEFAULT_INTERFACE.stdout}}"
@@ -70,12 +49,12 @@
     SPGW_INTERNAL_INTERFACE: "{{HOST_DEFAULT_INTERFACE.stdout}}"
     SPGW_EXTERNAL_INTERFACE: "{{HOST_DEFAULT_INTERFACE.stdout}}"
 
-- name: show gathered variables
-  debug: 
-    msg: 
-      - "HSS_IP: {{HSS_IP}}"
-      - "SPGW_IP: {{SPGW_IP}}"
-      - "MME_IP: {{MME_IP}}"
-      - "INTERFACE: {{HSS_INTERFACE}}"
-      - "MASK: {{HSS_IP_MASK}}"
-      - "TARGET_SERVICE: {{TARGET_SERVICE}}"
+# - name: show gathered variables
+#   debug: 
+#     msg: 
+#       - "HSS_IP: {{HSS_IP}}"
+#       - "SPGW_IP: {{SPGW_IP}}"
+#       - "MME_IP: {{MME_IP}}"
+#       - "INTERFACE: {{HSS_INTERFACE}}"
+#       - "MASK: {{HSS_IP_MASK}}"
+#       - "TARGET_SERVICE: {{TARGET_SERVICE}}"

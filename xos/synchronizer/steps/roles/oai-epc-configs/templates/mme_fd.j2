@@ -100,4 +100,4 @@ LoadExtension = "dict_s6a.fdx";
 # incoming connections from other peers, see the acl_wl.fdx? extension which 
 # allows exactly this. 
 
-ConnectPeer= "{{HSS_HOST}}" { ConnectTo = "{{HSS_IP}}"; No_SCTP ; No_IPv6; Prefer_TCP; No_TLS; port = 3868;  realm = "{{REALM}}";};
+ConnectPeer= "{{HSS_HOST}}" { ConnectTo = "{{HSS_PRIVATE_IP}}"; No_SCTP ; No_IPv6; Prefer_TCP; No_TLS; port = 3868;  realm = "{{REALM}}";};

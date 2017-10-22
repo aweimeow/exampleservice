@@ -67,9 +67,10 @@ class SyncOAIServiceInstance(SyncInstanceUsingAnsible):
             name = oai.tenant_message
             instance = Instance.objects.filter(id=oai.instance_id).first()
             ip = [port.ip for port in instance.ports.all()]
-            fields['{}_PRIVATE_IP'] = filter(lambda x: x.startswith('10.0'), ip)[0]
-            fields['{}_PUBLIC_IP'] = filter(lambda x: x.startswith('10.8'), ip)[0]
-        
+
+            for service, prefix in [('%s_PRIVATE_IP' % name, '10.0'), ('%s_PUBLIC_IP' % name, '10.8')]:
+                fields[service] = list(filter(lambda x: x.startswith(prefix), ip))[0]
+
         return fields
 
     def delete_record(self, port):
