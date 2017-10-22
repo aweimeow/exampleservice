@@ -23,8 +23,19 @@
   sudo: no
   gather_facts: no
   vars:
-    - tenant_message: "{{ tenant_message }}"
-    - service_message: "{{ service_message }}"
+    - MME_PRIVATE_IP: "{{ MME_PRIVATE_IP }}"
+    - MME_PUBLIC_IP: "{{ MME_PUBLIC_IP }}"
+    - HSS_PRIVATE_IP: "{{ HSS_PRIVATE_IP }}"
+    - HSS_PUBLIC_IP: "{{ HSS_PUBLIC_IP }}"
+    - SPGW_PRIVATE_IP: "{{ SPGW_PRIVATE_IP }}"
+    - SPGW_PUBLIC_IP: "{{ SPGW_PUBLIC_IP }}"
 
   roles:
-    - create_index
+    - python2
+    - oai-identity-file
+    - xos-variables
+    - xos-network
+    - xos-wait-instance
+    - oai-epc-configs
+    - oai-epc-database
+    - oai-epc-systemd

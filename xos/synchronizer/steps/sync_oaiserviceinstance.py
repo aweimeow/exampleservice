@@ -62,6 +62,16 @@ class SyncOAIServiceInstance(SyncInstanceUsingAnsible):
         fields['service_message'] = oaiservice.service_message
         return fields
 
+    def get_instance_ip(self, fields):
+        for oai in OAIServiceInstance.objects.all():
+            name = oai.tenant_message
+            instance = Instance.objects.filter(id=oai.instance_id).first()
+            ip = [port.ip for port in instance.ports.all()]
+            fields['{}_PRIVATE_IP'] = filter(lambda x: x.startswith('10.0'), ip)[0]
+            fields['{}_PUBLIC_IP'] = filter(lambda x: x.startswith('10.8'), ip)[0]
+        
+        return fields
+
     def delete_record(self, port):
         # Nothing needs to be done to delete an exampleservice; it goes away
         # when the instance holding the exampleservice is deleted.
@@ -91,6 +101,7 @@ class SyncOAIServiceInstance(SyncInstanceUsingAnsible):
 
             #Run ansible playbook to update the routing table entries in the instance
             fields = self.get_ansible_fields(instance)
+            fields = self.get_instance_ip(fields)
             fields["ansible_tag"] =  obj.__class__.__name__ + "_" + str(obj.id) + "_monitoring"
             fields["target_uri"] = monitoring_agent_info.target_uri
 
