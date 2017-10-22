@@ -48,7 +48,7 @@ class SyncOAIServiceInstance(SyncInstanceUsingAnsible):
 
         oaiservice = OAIService.objects.filter(id=o.owner.id)
 
-        if not oaiervice:
+        if not oaiservice:
             return None
 
         return oaiservice[0]
