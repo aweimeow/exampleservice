@@ -20,7 +20,7 @@
 - hosts: "{{ instance_name }}"
   connection: ssh
   user: ubuntu
-  sudo: no
+  sudo: yes
   gather_facts: no
   vars:
     - MME_PRIVATE_IP: "{{ MME_PRIVATE_IP }}"
@@ -29,6 +29,7 @@
     - HSS_PUBLIC_IP: "{{ HSS_PUBLIC_IP }}"
     - SPGW_PRIVATE_IP: "{{ SPGW_PRIVATE_IP }}"
     - SPGW_PUBLIC_IP: "{{ SPGW_PUBLIC_IP }}"
+    - tenant_message: "{{ tenant_message }}"
 
   roles:
     - python2

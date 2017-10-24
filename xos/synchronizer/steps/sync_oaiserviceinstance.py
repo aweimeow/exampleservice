@@ -16,6 +16,7 @@
 
 import os
 import sys
+import time
 from synchronizers.new_base.SyncInstanceUsingAnsible import SyncInstanceUsingAnsible
 from synchronizers.new_base.modelaccessor import *
 from xos.logger import Logger, logging
@@ -60,16 +61,20 @@ class SyncOAIServiceInstance(SyncInstanceUsingAnsible):
         fields['tenant_message'] = o.tenant_message
         oaiservice = self.get_oaiservice(o)
         fields['service_message'] = oaiservice.service_message
-        return fields
 
-    def get_instance_ip(self, fields):
         for oai in OAIServiceInstance.objects.all():
             name = oai.tenant_message
             instance = Instance.objects.filter(id=oai.instance_id).first()
-            ip = [port.ip for port in instance.ports.all()]
+
+            ip = []
+
+            while not ip:
+                ip = [port.ip for port in instance.ports.all()]
+                time.sleep(2)
 
             for service, prefix in [('%s_PRIVATE_IP' % name, '10.0'), ('%s_PUBLIC_IP' % name, '10.8')]:
-                fields[service] = list(filter(lambda x: x.startswith(prefix), ip))[0]
+                service_ip = list(filter(lambda x: x.startswith(prefix), ip))[0]
+                fields[service] = service_ip
 
         return fields
 
@@ -102,7 +107,6 @@ class SyncOAIServiceInstance(SyncInstanceUsingAnsible):
 
             #Run ansible playbook to update the routing table entries in the instance
             fields = self.get_ansible_fields(instance)
-            fields = self.get_instance_ip(fields)
             fields["ansible_tag"] =  obj.__class__.__name__ + "_" + str(obj.id) + "_monitoring"
             fields["target_uri"] = monitoring_agent_info.target_uri
 

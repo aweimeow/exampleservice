@@ -1,7 +1,7 @@
 
 - name: wait for hss start if current service is mme
   wait_for:
-    host: "{{HSS_IP}}"
+    host: "{{HSS_PRIVATE_IP}}"
     port: 22
     state: started
     delay: 10
@@ -9,7 +9,7 @@
 
 - name: wait for mme start if current service is spgw
   wait_for:
-    host: "{{MME_IP}}"
+    host: "{{MME_PRIVATE_IP}}"
     port: 22
     state: started
     delay: 10

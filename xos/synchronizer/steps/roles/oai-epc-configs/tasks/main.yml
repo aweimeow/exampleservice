@@ -31,5 +31,5 @@
     line: "{{item.line}}"
     regexp: "{{item.regex}}"
   with_items:
-    - { regex: "{{HSS_HOST}}", line: '{{HSS_IP}} {{HSS_HOST}} {{HSS_ALIAS}}' }
-    - { regex: "{{MME_HOST}}", line: '{{MME_IP}} {{MME_HOST}} {{MME_ALIAS}}'}
+    - { regex: "{{HSS_HOST}}", line: '{{HSS_PRIVATE_IP}} {{HSS_HOST}} {{HSS_ALIAS}}' }
+    - { regex: "{{MME_HOST}}", line: '{{MME_PRIVATE_IP}} {{MME_HOST}} {{MME_ALIAS}}'}

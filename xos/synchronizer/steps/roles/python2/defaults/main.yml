@@ -1,3 +1,0 @@
-ansible_ssh_user: oai
-ansible_ssh_password: oai
-ansible_become_password: oai
