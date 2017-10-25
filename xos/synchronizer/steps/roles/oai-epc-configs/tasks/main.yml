@@ -18,12 +18,12 @@
 - name: set host name of mme
   hostname:
     name: "{{MME_ALIAS}}"
-  when: TARGET_SERVICE == "mme"
+  when: TARGET_SERVICE == "MME"
 
 - name: set host name of hss
   hostname:
     name: "{{HSS_ALIAS}}"
-  when: TARGET_SERVICE == "hss"
+  when: TARGET_SERVICE == "HSS"
 
 - name: set hosts
   lineinfile:

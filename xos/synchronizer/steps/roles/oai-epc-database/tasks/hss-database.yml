@@ -1,7 +1,7 @@
 - name: install mysql for python
   apt:
     name: python-mysqldb
-    state: present
+    update_cache: yes
 
 - name: drop oai_db database
   mysql_db:

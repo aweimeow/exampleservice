@@ -5,7 +5,7 @@
     port: 22
     state: started
     delay: 10
-  when: TARGET_SERVICE == "mme"
+  when: TARGET_SERVICE == "MME"
 
 - name: wait for mme start if current service is spgw
   wait_for:
@@ -13,4 +13,4 @@
     port: 22
     state: started
     delay: 10
-  when: TARGET_SERVICE == "spgw"
+  when: TARGET_SERVICE == "SPGW"
