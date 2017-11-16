@@ -60,7 +60,6 @@ class SyncOAIServiceInstance(SyncInstanceUsingAnsible):
         fields = {}
         fields['tenant_message'] = o.tenant_message
         oaiservice = self.get_oaiservice(o)
-        fields['service_message'] = oaiservice.service_message
 
         for oai in OAIServiceInstance.objects.all():
             name = oai.tenant_message

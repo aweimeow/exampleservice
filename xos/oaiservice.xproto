@@ -3,12 +3,12 @@ option app_label = "oaiservice";
 option verbose_name = "OAI Service";
 
 message OAIService (Service){
-    required string service_message = 1 [help_text = "Service Message to Display", max_length = 254, null = False, db_index = False, blank = False];
+    option verbose_name = "Open Air Interface Service";
+    option name = "oaiservice";
 }
 
-
 message OAIServiceInstance (TenantWithContainer){
-     option name = "oaiserviceinstance";
      option verbose_name = "OAI Service Instance";
+     option name = "oaiserviceinstance";
      required string tenant_message = 1 [help_text = "Tenant Message to Display", max_length = 254, null = False, db_index = False, blank = False];
 }
